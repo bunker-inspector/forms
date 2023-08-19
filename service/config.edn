@@ -1,23 +1,22 @@
-{#const :oauth/client-id "714923602655-3ejfu8p0ok2k8q0godchvpmjsp2kt6l5.apps.googleusercontent.com"
- :web/app {:routes #ig/ref :web.routes/root
-           :session-key #ig/ref :web.security/session-key
-           :cors #ig/ref :web.security/cors}
+{
+ :web/app {:router #ig/ref :web/router}
+
  :web/server {:opts {:port 3001
                      :join? false}
               :app #ig/ref :web/app}
- :web.routes/root {:routes [#ig/ref :web.routes/login
-                            #ig/ref :web.routes/user]}
+ :web/router {:routes #ig/ref :web/routes
+             :middleware #ig/ref :web/middleware}
 
- :web/routes {:user {:me-handler #ig/ref :web.handlers/me}
-              :login {:login-handler #ig/ref :web.handlers/login
-                     :auth-code-handler #ig/ref :web.handlers/auth-code}}
+ :web/middleware {:security-opts #ig/ref :web/security}
 
- :web.handlers/login {:db-ops #ig/ref :db/operations}
- :web.handlers/me {:db-ops #ig/ref :db/operations}
- :web.handlers/auth-code {:db-ops #ig/ref :db/operations}
+ :web/routes {:handlers #ig/ref :web/handlers}
 
- :web.security/cors {:access-control-allow-methods [:get :put :post :delete]}
- :web.security/session-key #env SESSION_KEY
+ :web/handlers {:db-ops #ig/ref :db/operations}
+
+ :web/security {#const :cors {:access-control-allow-methods [:get :put :post :delete]}
+                :session-key #env SESSION_KEY}
+
+ #const :web/auth {#const :oauth/client-id "714923602655-3ejfu8p0ok2k8q0godchvpmjsp2kt6l5.apps.googleusercontent.com"}
 
  :service.google/get-token-fn {:db-ops #ig/ref :db/operations}
 

@@ -5,6 +5,7 @@
         ring/ring {:mvn/version "1.9.6"}
         aleph/aleph {:mvn/version "0.7.0-alpha1"}
         metosin/reitit {:mvn/version "0.7.0-alpha5"}
+        metosin/reitit-ring {:mvn/version "0.7.0-alpha5"}
         ring-cors/ring-cors {:mvn/version "0.1.13"}
         ring/ring-json {:mvn/version "0.5.1"}
 

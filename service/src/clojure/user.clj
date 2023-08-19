@@ -4,13 +4,15 @@
    [integrant.core :as ig]
    [forms.config :as config]))
 
-(comment
-  (do
-    (ir/set-prep! #(ig/prep (config/resolve-config)))
+(defonce debug-a (atom {}))
 
-    (defonce debug-a (atom {}))
-    (defn tap-fn [xs] (apply swap! debug-a assoc xs))
-    (add-tap tap-fn)))
+(defn tap-fn [xs] (apply swap! debug-a assoc xs))
+(add-tap tap-fn)
 
 (comment
-  (reset))
+  (ir/set-prep! #(ig/prep (config/resolve-config)))
+  (reset)
+
+  (-> (config/resolve-config)  ig/prep)
+  @debug-a
+  (ig/init-key :web/middleware { :security-opts { :key :web/security } } ))
