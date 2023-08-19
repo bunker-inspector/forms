@@ -1,0 +1,7 @@
+.cpcache
+.nrepl-port
+.calva
+.lsp
+.clj-kondo
+*.code-workspace
+secrets.edn

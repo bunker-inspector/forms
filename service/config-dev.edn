@@ -1,0 +1,11 @@
+{#const :oauth/redirect-uri "http://localhost:8080"
+ #const :web.security/cors {:access-control-allow-origin [#regex "http://localhost:8080"]}
+ #const :web.security/session-key "good 16-byte-key"
+ :db/connection {:dbtype "postgres"
+                 :classname "org.postgresql.Driver"
+                 :subprotocol "postgresql"
+                 :subname "//localhost:5432/forms"
+                 :user "root"
+                 :username "root"
+                 :dbname "forms"
+                 :password "root"}}
